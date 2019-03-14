@@ -1,0 +1,25 @@
+{
+	"fields": {
+		"name": ["Monster", "Goblin", "Dragon"],
+		"Health": {
+			"min": 5,
+			"max": 10
+		},
+		"Effect": {
+			"options": [
+				["When played ", "When drawn ", "On death "],
+				[
+					"draw a card ",
+					"heal to full life ",
+					"remove a card from your opponent hand "
+				],
+				[
+					"and end your turn.",
+					"and reduce your mana by half.",
+					"and destory the larget monster on the field."
+				]
+			]
+		},
+		"Description": ["This is awesome card", "A lame card"]
+	}
+}

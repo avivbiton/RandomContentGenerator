@@ -4,8 +4,9 @@ import { randomNumber } from "./utils";
 import { RandomParser } from "./Parsers/RandomParser";
 const availableParsers: Parser[] = [new MinMaxParser(), new RandomParser()];
 
-export class generator {
+export class ContentGenerator {
 	schema: any;
+
 	constructor(schema: any) {
 		this.schema = schema;
 	}

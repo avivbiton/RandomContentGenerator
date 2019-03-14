@@ -1,5 +1,5 @@
-import { generator } from "./generator";
+import { ContentGenerator } from "./generator";
 const exampleSchema = require("./exampleSchema.json");
 
-let gen = new generator(exampleSchema);
+let gen = new ContentGenerator(exampleSchema);
 console.log(gen.build());

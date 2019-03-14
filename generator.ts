@@ -2,7 +2,6 @@ import { Parser } from "./Parsers/Parser";
 import { MinMaxParser } from "./Parsers/MinMaxParser";
 import { randomNumber } from "./utils";
 import { RandomParser } from "./Parsers/RandomParser";
-
 const availableParsers: Parser[] = [new MinMaxParser(), new RandomParser()];
 
 export class generator {

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var BasicParser_1 = require("./BasicParser");
 var Parser = /** @class */ (function () {
     function Parser() {
     }
@@ -17,11 +18,28 @@ var Parser = /** @class */ (function () {
                 continue;
             var index = dataKeys.indexOf(parserKeyName);
             if (index == -1 ||
-                typeof data[dataKeys[i]] !== typeof this[parserKeyName])
+                typeof data[dataKeys[index]] !== typeof this[parserKeyName])
                 return false;
         }
         return true;
     };
+    Parser.AddParsers = function (array) {
+        this.availableParsers = this.availableParsers.concat(array);
+    };
+    Parser.GetValidParser = function (data) {
+        if (Array.isArray(data))
+            return new BasicParser_1.BasicParser(data);
+        var found = null;
+        this.availableParsers.forEach(function (parser) {
+            var clone = parser.clone(data);
+            if (clone !== null) {
+                found = clone;
+                return;
+            }
+        });
+        return found;
+    };
+    Parser.availableParsers = new Array();
     return Parser;
 }());
 exports.Parser = Parser;

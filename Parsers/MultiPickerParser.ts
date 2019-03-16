@@ -1,7 +1,7 @@
 import { Parser } from "./Parser";
 import { randomNumber } from "../utils";
 
-export class RandomParser extends Parser {
+export class MultiPickerParser extends Parser {
 	options: Array<Array<string>>;
 
 	constructor() {
@@ -22,8 +22,8 @@ export class RandomParser extends Parser {
 		return parsedString;
 	}
 
-	protected cloneObject(data: object): RandomParser {
-		let newParser = new RandomParser();
+	protected cloneObject(data: object): MultiPickerParser {
+		let newParser = new MultiPickerParser();
 		newParser.options = data["options"];
 
 		return newParser;

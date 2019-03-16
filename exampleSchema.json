@@ -1,6 +1,6 @@
 {
 	"fields": {
-		"name": ["Monster", "Goblin", "Dragon"],
+		"name": { "text": ["Monster", "Goblin", "Dragon"] },
 		"Health": {
 			"min": 5,
 			"max": 10

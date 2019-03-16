@@ -15,27 +15,19 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Parser_1 = require("./Parser");
 var utils_1 = require("../utils");
-var RandomParser = /** @class */ (function (_super) {
-    __extends(RandomParser, _super);
-    function RandomParser() {
+var BasicParser = /** @class */ (function (_super) {
+    __extends(BasicParser, _super);
+    function BasicParser(text) {
         var _this = _super.call(this) || this;
-        _this.options = new Array();
+        _this.text = text;
         return _this;
     }
-    RandomParser.prototype.parse = function () {
-        var parsedString = "";
-        // pick one string from each array at random
-        for (var i = 0; i < this.options.length; i++) {
-            var currentArray = this.options[i];
-            parsedString += currentArray[utils_1.randomNumber(0, currentArray.length)];
-        }
-        return parsedString;
+    BasicParser.prototype.parse = function () {
+        return this.text[utils_1.randomNumber(0, this.text.length)];
     };
-    RandomParser.prototype.cloneObject = function (data) {
-        var newParser = new RandomParser();
-        newParser.options = data["options"];
-        return newParser;
+    BasicParser.prototype.cloneObject = function (dataObject) {
+        return new BasicParser(dataObject["text"]);
     };
-    return RandomParser;
+    return BasicParser;
 }(Parser_1.Parser));
-exports.RandomParser = RandomParser;
+exports.BasicParser = BasicParser;

@@ -4,3 +4,4 @@ var ContentGenerator_1 = require("./ContentGenerator");
 var exampleSchema = require("./exampleSchema.json");
 var gen = new ContentGenerator_1.ContentGenerator(exampleSchema);
 console.log(gen.build());
+//# sourceMappingURL=index.js.map

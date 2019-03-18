@@ -4,3 +4,4 @@ function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 exports.randomNumber = randomNumber;
+//# sourceMappingURL=utils.js.map

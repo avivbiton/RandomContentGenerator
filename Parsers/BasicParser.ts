@@ -3,6 +3,7 @@ import { randomNumber } from "../utils";
 
 export class BasicParser extends Parser {
 	text: string[];
+
 	constructor(text: string[]) {
 		super();
 		this.text = text;

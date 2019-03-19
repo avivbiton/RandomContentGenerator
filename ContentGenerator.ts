@@ -5,6 +5,7 @@ import {
 } from "./Parsers/availableParsers";
 
 import { Parser } from "./Parsers/Parser";
+import { InvalidParserException } from "./Exceptions/InvalidParserException";
 
 Parser.AddParsers([
 	new BasicParser([]),
@@ -26,9 +27,7 @@ export class ContentGenerator {
 			const fieldObject = this.schema.fields[fieldName];
 
 			let currentParser = Parser.GetValidParser(fieldObject);
-			if (currentParser == null) {
-				throw `Unable to find a valid parser. JSON format may be invalid. \nObject: ${fieldObject}`;
-			}
+			if (currentParser == null) throw new InvalidParserException(fieldObject);
 
 			newObject[fieldName] = currentParser.parse();
 		}

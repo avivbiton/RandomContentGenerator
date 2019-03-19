@@ -10,7 +10,9 @@ export class BasicParser extends Parser {
 	}
 
 	parse(): string {
-		return this.text[randomNumber(0, this.text.length)];
+		let selectedText = this.text[randomNumber(0, this.text.length)];
+
+		return this.parseProperties(selectedText);
 	}
 
 	protected cloneObject(dataObject: object): Parser {

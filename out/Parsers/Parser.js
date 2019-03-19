@@ -1,9 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var BasicParser_1 = require("./BasicParser");
+var utils_1 = require("../utils");
+var InvalidParserException_1 = require("../Exceptions/InvalidParserException");
 var Parser = /** @class */ (function () {
     function Parser() {
-        this.optionalFields = ["properties"];
+        this.optionalFields = ["optionalFields", "properties"];
         this.properties = [];
     }
     /**
@@ -11,20 +13,24 @@ var Parser = /** @class */ (function () {
      * @param dataObject object is used to create the parser
      */
     Parser.prototype.clone = function (dataObject) {
-        if (this.validateData(dataObject) == false)
+        if (this.isDataValid(dataObject) == false)
             return null;
-        return this.cloneObject(dataObject);
+        var clone = this.cloneObject(dataObject);
+        if (dataObject.hasOwnProperty("properties")) {
+            clone.properties = dataObject["properties"];
+        }
+        return clone;
     };
     /**
      * Validate if an object properties match a parser.
      * @param data validates the object contains all the data to be used as parser.
      */
-    Parser.prototype.validateData = function (data) {
+    Parser.prototype.isDataValid = function (data) {
         var parserKeys = Object.keys(this);
         var dataKeys = Object.keys(data);
         for (var i = 0; i < parserKeys.length; i++) {
             var parserKeyName = parserKeys[i];
-            if (this.skipOptionalFields(parserKeyName))
+            if (this.isOptionalField(parserKeyName))
                 continue;
             var index = dataKeys.indexOf(parserKeyName);
             if (index == -1 ||
@@ -34,11 +40,10 @@ var Parser = /** @class */ (function () {
         return true;
     };
     /**
-     *  SKips the optional fields
+     * checks if a property name is present in the optional properties array for the parser.
+     * @param keyName the name of the property
      */
-    Parser.prototype.skipOptionalFields = function (keyName) {
-        if (keyName == "optionalFields")
-            return true;
+    Parser.prototype.isOptionalField = function (keyName) {
         if (typeof this[keyName] === "function")
             return true;
         if (this.optionalFields.indexOf(keyName) != -1)
@@ -53,7 +58,10 @@ var Parser = /** @class */ (function () {
     Parser.prototype.parseProperties = function (text) {
         var newString = text;
         for (var i = 0; i < this.properties.length; i++) {
-            newString.replace(new RegExp("@{" + i + "}", "g"), this.properties[i]);
+            var parser = Parser.GetValidParser(this.properties[i]);
+            if (parser == null)
+                throw new InvalidParserException_1.InvalidParserException(this.properties[i]);
+            newString = newString.replace(new RegExp(utils_1.escapeRegExp("@{" + i + "}"), "g"), this.properties[i]);
         }
         return newString;
     };
@@ -85,8 +93,8 @@ var Parser = /** @class */ (function () {
         return found;
     };
     /*
-    To add new parsers, create an object of the type of the parser and add it to the arrary by calling AddParsers
-    This will allow to add custom parsers that are not included by this library
+    Parsers accepts a data object and creates a returns a string based on the object and the type of parser
+    To add new parsers, create a new type that extend the parser class and add an instance of it to the arrary by calling AddParsers.
     */
     Parser.availableParsers = new Array();
     return Parser;

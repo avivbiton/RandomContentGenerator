@@ -1,17 +1,19 @@
 import { BasicParser } from "./BasicParser";
+import { escapeRegExp } from "../utils";
+import { InvalidParserException } from "../Exceptions/InvalidParserException";
 
 export abstract class Parser {
 	/*
-	To add new parsers, create an object of the type of the parser and add it to the arrary by calling AddParsers
-	This will allow to add custom parsers that are not included by this library 
+	Parsers accepts a data object and creates a returns a string based on the object and the type of parser
+	To add new parsers, create a new type that extend the parser class and add an instance of it to the arrary by calling AddParsers.	
 	*/
 	private static availableParsers: Parser[] = new Array();
 
-	protected optionalFields: string[];
-	protected properties: string[];
+	protected readonly optionalFields: string[];
+	protected properties: any[];
 
 	constructor() {
-		this.optionalFields = ["properties"];
+		this.optionalFields = ["optionalFields", "properties"];
 		this.properties = [];
 	}
 
@@ -22,8 +24,14 @@ export abstract class Parser {
 	 * @param dataObject object is used to create the parser
 	 */
 	clone(dataObject: object): Parser {
-		if (this.validateData(dataObject) == false) return null;
-		return this.cloneObject(dataObject);
+		if (this.isDataValid(dataObject) == false) return null;
+
+		let clone = this.cloneObject(dataObject);
+
+		if (dataObject.hasOwnProperty("properties")) {
+			clone.properties = dataObject["properties"];
+		}
+		return clone;
 	}
 
 	protected abstract cloneObject(dataObject: object): Parser;
@@ -32,14 +40,14 @@ export abstract class Parser {
 	 * Validate if an object properties match a parser.
 	 * @param data validates the object contains all the data to be used as parser.
 	 */
-	protected validateData(data: object): boolean {
+	protected isDataValid(data: object): boolean {
 		const parserKeys = Object.keys(this);
 		const dataKeys = Object.keys(data);
 
 		for (let i = 0; i < parserKeys.length; i++) {
 			const parserKeyName = parserKeys[i];
 
-			if (this.skipOptionalFields(parserKeyName)) continue;
+			if (this.isOptionalField(parserKeyName)) continue;
 
 			const index = dataKeys.indexOf(parserKeyName);
 
@@ -53,10 +61,10 @@ export abstract class Parser {
 	}
 
 	/**
-	 *  SKips the optional fields
+	 * checks if a property name is present in the optional properties array for the parser.
+	 * @param keyName the name of the property
 	 */
-	private skipOptionalFields(keyName: string): boolean {
-		if (keyName == "optionalFields") return true;
+	private isOptionalField(keyName: string): boolean {
 		if (typeof this[keyName] === "function") return true;
 		if (this.optionalFields.indexOf(keyName) != -1) return true;
 
@@ -71,7 +79,12 @@ export abstract class Parser {
 	protected parseProperties(text: string): string {
 		let newString = text;
 		for (let i = 0; i < this.properties.length; i++) {
-			newString.replace(new RegExp(`@{${i}}`, `g`), this.properties[i]);
+			let parser = Parser.GetValidParser(this.properties[i]);
+			if (parser == null) throw new InvalidParserException(this.properties[i]);
+			newString = newString.replace(
+				new RegExp(escapeRegExp(`@{${i}}`), `g`),
+				this.properties[i]
+			);
 		}
 
 		return newString;

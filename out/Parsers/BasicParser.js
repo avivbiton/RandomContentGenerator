@@ -23,7 +23,8 @@ var BasicParser = /** @class */ (function (_super) {
         return _this;
     }
     BasicParser.prototype.parse = function () {
-        return this.text[utils_1.randomNumber(0, this.text.length)];
+        var selectedText = this.text[utils_1.randomNumber(0, this.text.length)];
+        return this.parseProperties(selectedText);
     };
     BasicParser.prototype.cloneObject = function (dataObject) {
         return new BasicParser(dataObject["text"]);

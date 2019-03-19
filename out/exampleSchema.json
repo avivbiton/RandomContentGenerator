@@ -1,13 +1,16 @@
 {
 	"fields": {
-		"name": { "text": ["Monster", "Goblin", "Dragon"] },
+		"name": {
+			"text": ["Monster @{1}", "Goblin  @{1}", "Dragon  @{0}"],
+			"properties": ["LV", "RV"]
+		},
 		"Health": {
 			"min": 5,
-			"max": 10
+			"mar": 10
 		},
 		"Effect": {
 			"options": [
-				["When played ", "When drawn ", "On death "],
+				["When played @{r} ", "When drawn ", "On death "],
 				[
 					"draw a card ",
 					"heal to full life ",
@@ -18,7 +21,8 @@
 					"and reduce your mana by half.",
 					"and destory the larget monster on the field."
 				]
-			]
+			],
+			"properties": ["Aviv"]
 		},
 		"Description": ["This is awesome card", "A lame card"]
 	}

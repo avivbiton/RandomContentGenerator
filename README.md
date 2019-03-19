@@ -4,7 +4,7 @@ Simple but customizable content generation for whatever reason you may need it (
 You feed RCG a Schema and it will output the content in JSON format. As simple as that.
 
 An example of a very basic schema.
-
+```json
     {
         "fields":{
             "projectTopic": ["Cooking", "Travel", "Job Search"],
@@ -12,18 +12,18 @@ An example of a very basic schema.
             "Language": ["Typescript", "C#", "Python"]
         }
     }
-
+```
 The generator will pick one of each at random and generate a random result, for example:
-
+```json
     { "projectTopic": "Travel", "Type": "Website", Language: "C#" }
-
+```
 ## Usage
 
 Define a schema and feed it into the constructor and then simply call build();
-
+```javascript
     let generator = new ContentGenerator(schema);
     let json = generator.build();
-
+```
 
 ## Docs
 We offer full documentation over everything in RCG. But you don't have to go that far. Reading the first wiki page is enough to get you started. After that, each page you read will give more tools to customize your schemas the way you want to.

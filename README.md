@@ -15,7 +15,7 @@ An example of a very basic schema.
 ```
 The generator will pick one of each at random and generate a random result, for example:
 ```json
-    { "projectTopic": "Travel", "Type": "Website", Language: "C#" }
+    { "projectTopic": "Travel", "Type": "Website", "Language": "C#" }
 ```
 ## Usage
 

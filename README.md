@@ -1,16 +1,9 @@
-# Random Content Generator (RCG)
+Simple but customizable content generation for whatever reason you may need it (inspiration, random infinite content, and more).
 
-Generate a random content based on a schema can be used as an inspiration or real-time content generation for your projects.
-RCG was designed to fit for every type of project thanks to custom schemas that will allow you to customize the content generation to fit your project. The content will be parsed to JSON format.
+## How it works
+You feed RCG a Schema and it will output the content in JSON format. As simple as that.
 
-# How it works
-
-You need to define a schema first. A schema can be very simple or extremely complex it all depends on your personal needs.  
-a schema has a property called "fields". Each field will be generated into the final result.  
-The generator use different types of parses to pick or generate the content.  
-The most basic parser (Which, technically, is not even parser) will just pick a random string out of a array of strings.
-
-An example of very basic schema (no parsers)
+An example of a very basic schema.
 
     {
         "fields":{
@@ -24,36 +17,20 @@ The generator will pick one of each at random and generate a random result, for 
 
     { "projectTopic": "Travel", "Type": "Website", Language: "C#" }
 
-# Parsers
+## Usage
 
-Just picking random values is often not enough, you may want more control over the generated content, this is where the Parsers comes in.  
-Here we have a simple parser called MinMaxParser. This parser will take a min (inclusive) and max (exclusive) values and generate a random number.
-To use it, we need to define an object as the value of field
-
-    {
-        "fields":{
-            "MonsterName": ["Dragon", "Goblin", "Monster"],
-            "Health": {
-                "min": 100,
-                "max": 500
-            }
-        }
-    }
-
-The generator will detect the object passed into the health field and let the MinMaxParser generate a random number.
-The result:
-
-    {"MonsterName":"Goblin","Health":"379"}
-
-There are more types of Parsers, see the wiki section for more information (THIS WILL COME SOON)
-
-# Usage
-
-Using the generator is actaully easy, just include the package in your project and define a schema.
+Define a schema and feed it into the constructor and then simply call build();
 
     let generator = new ContentGenerator(schema);
     let json = generator.build();
 
-# Work In Progress
 
-This is very early version of the package and may contain bugs and heavy changes in the future. use at your own risk.
+## Docs
+We offer full documentation over everything in RCG. But you don't have to go that far. Reading the first wiki page is enough to get you started. After that, each page you read will give more tools to customize your schemas the way you want to.
+
+## A little dive into the library
+RCG uses "Parsers" to read the schema. The library will read the schema and divide it into data objects and then find the first valid parser for the object, after finding the right parser, we tell it to parse the data and return the result.   
+If you wish to dive deeper visit our wiki section.
+
+## Work In Progress
+This is a very early version of the package and may contain bugs and heavy changes in the future. use at your own risk.

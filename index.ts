@@ -1,4 +1,4 @@
-import { ContentGenerator } from "./ContentGenerator";
+import { ContentGenerator } from "./src/ContentGenerator";
 const exampleSchema = require("./exampleSchema.json");
 
 let gen = new ContentGenerator(exampleSchema);

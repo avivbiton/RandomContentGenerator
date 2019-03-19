@@ -6,7 +6,7 @@
 		},
 		"Health": {
 			"min": 5,
-			"mar": 10
+			"max": 10
 		},
 		"Effect": {
 			"options": [

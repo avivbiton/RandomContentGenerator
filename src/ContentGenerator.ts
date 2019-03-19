@@ -5,6 +5,7 @@ import {
 } from "./Parsers/availableParsers";
 
 import { Parser } from "./Parsers/Parser";
+
 import { InvalidParserException } from "./Exceptions/InvalidParserException";
 
 Parser.AddParsers([

@@ -61,7 +61,7 @@ var Parser = /** @class */ (function () {
             var parser = Parser.GetValidParser(this.properties[i]);
             if (parser == null)
                 throw new InvalidParserException_1.InvalidParserException(this.properties[i]);
-            newString = newString.replace(new RegExp(utils_1.escapeRegExp("@{" + i + "}"), "g"), this.properties[i]);
+            newString = newString.replace(new RegExp(utils_1.escapeRegExp("@{" + i + "}"), "g"), parser.parse());
         }
         return newString;
     };

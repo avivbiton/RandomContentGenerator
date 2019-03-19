@@ -83,7 +83,7 @@ export abstract class Parser {
 			if (parser == null) throw new InvalidParserException(this.properties[i]);
 			newString = newString.replace(
 				new RegExp(escapeRegExp(`@{${i}}`), `g`),
-				this.properties[i]
+				parser.parse()
 			);
 		}
 

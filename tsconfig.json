@@ -5,6 +5,7 @@
 		"strict": false,
 		"esModuleInterop": true,
 		"sourceMap": true,
-		"outDir": "out"
+		"outDir": "out",
+		"resolveJsonModule": true
 	}
 }

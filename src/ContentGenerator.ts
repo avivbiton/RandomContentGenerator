@@ -1,12 +1,9 @@
-import {
-	BasicParser,
-	MinMaxParser,
-	MultiPickerParser
-} from "./Parsers/availableParsers";
-
 import { Parser } from "./Parsers/Parser";
 
 import { InvalidParserException } from "./Exceptions/InvalidParserException";
+import { BasicParser } from "./Parsers/BasicParser";
+import { MinMaxParser } from "./Parsers/MinMaxParser";
+import { MultiPickerParser } from "./Parsers/MultiPickerParser";
 
 Parser.AddParsers([
 	new BasicParser([]),

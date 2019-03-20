@@ -1,4 +1,3 @@
-import { BasicParser } from "./BasicParser";
 import { escapeRegExp } from "../utils";
 import { InvalidParserException } from "../Exceptions/InvalidParserException";
 
@@ -34,13 +33,15 @@ export abstract class Parser {
 		return clone;
 	}
 
-	protected abstract cloneObject(dataObject: object): Parser;
+	protected abstract cloneObject(dataObject: any): Parser;
 
 	/**
 	 * Validate if an object properties match a parser.
 	 * @param data validates the object contains all the data to be used as parser.
 	 */
-	protected isDataValid(data: object): boolean {
+	protected isDataValid(data: any): boolean {
+		if (typeof data !== "object") return false;
+
 		const parserKeys = Object.keys(this);
 		const dataKeys = Object.keys(data);
 
@@ -107,9 +108,6 @@ export abstract class Parser {
 	 * @returns A parser if found, otherwise returns null.
 	 */
 	public static GetValidParser(data: any): Parser {
-		if (Array.isArray(data)) return new BasicParser(data);
-		if (typeof data === "string") return new BasicParser([data]);
-
 		let found = null;
 		this.availableParsers.forEach(parser => {
 			let clone = parser.clone(data);

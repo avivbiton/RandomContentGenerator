@@ -15,7 +15,17 @@ export class BasicParser extends Parser {
 		return this.parseProperties(selectedText);
 	}
 
-	protected cloneObject(dataObject: object): Parser {
+	protected isDataValid(data: object): boolean {
+		if (Array.isArray(data) || typeof data === "string") return true;
+		if (typeof data === "object") {
+			return super.isDataValid(data);
+		}
+		return false;
+	}
+
+	protected cloneObject(dataObject: any): Parser {
+		if (Array.isArray(dataObject)) return new BasicParser(dataObject);
+		if (typeof dataObject === "string") return new BasicParser([dataObject]);
 		return new BasicParser(dataObject["text"]);
 	}
 }

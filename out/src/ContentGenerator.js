@@ -1,12 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var availableParsers_1 = require("./Parsers/availableParsers");
 var Parser_1 = require("./Parsers/Parser");
 var InvalidParserException_1 = require("./Exceptions/InvalidParserException");
+var BasicParser_1 = require("./Parsers/BasicParser");
+var MinMaxParser_1 = require("./Parsers/MinMaxParser");
+var MultiPickerParser_1 = require("./Parsers/MultiPickerParser");
 Parser_1.Parser.AddParsers([
-    new availableParsers_1.BasicParser([]),
-    new availableParsers_1.MinMaxParser(),
-    new availableParsers_1.MultiPickerParser()
+    new BasicParser_1.BasicParser([]),
+    new MinMaxParser_1.MinMaxParser(),
+    new MultiPickerParser_1.MultiPickerParser()
 ]);
 var ContentGenerator = /** @class */ (function () {
     function ContentGenerator(schema) {

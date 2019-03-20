@@ -26,7 +26,19 @@ var BasicParser = /** @class */ (function (_super) {
         var selectedText = this.text[utils_1.randomNumber(0, this.text.length)];
         return this.parseProperties(selectedText);
     };
+    BasicParser.prototype.isDataValid = function (data) {
+        if (Array.isArray(data) || typeof data === "string")
+            return true;
+        if (typeof data === "object") {
+            return _super.prototype.isDataValid.call(this, data);
+        }
+        return false;
+    };
     BasicParser.prototype.cloneObject = function (dataObject) {
+        if (Array.isArray(dataObject))
+            return new BasicParser(dataObject);
+        if (typeof dataObject === "string")
+            return new BasicParser([dataObject]);
         return new BasicParser(dataObject["text"]);
     };
     return BasicParser;

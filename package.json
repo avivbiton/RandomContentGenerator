@@ -1,15 +1,21 @@
 {
-	"name": "random-content-generator",
-	"version": "0.0.1",
-	"description": "Generator random content based on a schema",
-	"main": "index.js",
-	"scripts": {
-		"start": "node out/index.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"@types/node": "^11.11.2"
-	}
+  "name": "random-content-generator",
+  "version": "0.0.1",
+  "description": "Generator random content based on a schema",
+  "main": "index.js",
+  "scripts": {
+    "start": "node out/index.js",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^11.11.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "jest": "^24.5.0",
+    "ts-jest": "^24.0.0",
+    "typescript": "^3.3.4000"
+  }
 }

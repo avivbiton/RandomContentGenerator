@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var BasicParser_1 = require("./BasicParser");
 var utils_1 = require("../utils");
 var InvalidParserException_1 = require("../Exceptions/InvalidParserException");
 var Parser = /** @class */ (function () {
@@ -26,6 +25,8 @@ var Parser = /** @class */ (function () {
      * @param data validates the object contains all the data to be used as parser.
      */
     Parser.prototype.isDataValid = function (data) {
+        if (typeof data !== "object")
+            return false;
         var parserKeys = Object.keys(this);
         var dataKeys = Object.keys(data);
         for (var i = 0; i < parserKeys.length; i++) {
@@ -70,6 +71,8 @@ var Parser = /** @class */ (function () {
      * @param array an array of parsers to be added to the availableParsers pool.
      */
     Parser.AddParsers = function (array) {
+        if (array.some(function (i) { return i === null || typeof i === "undefined"; }))
+            throw new TypeError("Can not add null or undefined parsers.");
         this.availableParsers = this.availableParsers.concat(array);
     };
     /**
@@ -78,10 +81,6 @@ var Parser = /** @class */ (function () {
      * @returns A parser if found, otherwise returns null.
      */
     Parser.GetValidParser = function (data) {
-        if (Array.isArray(data))
-            return new BasicParser_1.BasicParser(data);
-        if (typeof data === "string")
-            return new BasicParser_1.BasicParser([data]);
         var found = null;
         this.availableParsers.forEach(function (parser) {
             var clone = parser.clone(data);

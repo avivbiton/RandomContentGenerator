@@ -1,4 +1,4 @@
-import { randomNumber } from "./utils";
+import { randomNumber } from "../utils";
 
 test("randomNumber - max random number is exclusive", () => {
 	expect(randomNumber(0, 1)).toBe(0);

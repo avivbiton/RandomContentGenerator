@@ -95,6 +95,9 @@ export abstract class Parser {
 	 * @param array an array of parsers to be added to the availableParsers pool.
 	 */
 	public static AddParsers(array: Parser[]) {
+		if (array.some(i => i === null || typeof i === "undefined"))
+			throw new TypeError("Can not add null or undefined parsers.");
+
 		this.availableParsers = this.availableParsers.concat(array);
 	}
 

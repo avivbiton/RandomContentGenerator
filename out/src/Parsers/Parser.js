@@ -70,6 +70,8 @@ var Parser = /** @class */ (function () {
      * @param array an array of parsers to be added to the availableParsers pool.
      */
     Parser.AddParsers = function (array) {
+        if (array.some(function (i) { return i === null || typeof i === "undefined"; }))
+            throw new TypeError("Can not add null or undefined parsers.");
         this.availableParsers = this.availableParsers.concat(array);
     };
     /**

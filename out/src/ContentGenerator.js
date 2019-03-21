@@ -5,6 +5,7 @@ var InvalidParserException_1 = require("./Exceptions/InvalidParserException");
 var BasicParser_1 = require("./Parsers/BasicParser");
 var MinMaxParser_1 = require("./Parsers/MinMaxParser");
 var MultiPickerParser_1 = require("./Parsers/MultiPickerParser");
+var InvalidSchemaFormatException_1 = require("./Exceptions/InvalidSchemaFormatException");
 Parser_1.Parser.AddParsers([
     new BasicParser_1.BasicParser([]),
     new MinMaxParser_1.MinMaxParser(),
@@ -15,17 +16,30 @@ var ContentGenerator = /** @class */ (function () {
         this.schema = schema;
     }
     ContentGenerator.prototype.build = function () {
+        this.throwIfInvalidSchema();
         var newObject = {};
-        var schemaFields = Object.keys(this.schema.fields);
+        var schemaFields = Object.keys(this.schema["fields"]);
         for (var i = 0; i < schemaFields.length; i++) {
             var fieldName = schemaFields[i];
-            var fieldObject = this.schema.fields[fieldName];
+            var fieldObject = this.schema["fields"][fieldName];
             var currentParser = Parser_1.Parser.GetValidParser(fieldObject);
             if (currentParser == null)
                 throw new InvalidParserException_1.InvalidParserException(fieldObject);
             newObject[fieldName] = currentParser.parse();
         }
         return JSON.stringify(newObject);
+    };
+    ContentGenerator.prototype.throwIfInvalidSchema = function (schema) {
+        var schemaToCheck = this.schema;
+        if (typeof schema !== "undefined") {
+            schemaToCheck = schema;
+        }
+        var requiredProperties = ["fields"];
+        for (var i = 0; i < requiredProperties.length; i++) {
+            if (schemaToCheck.hasOwnProperty(requiredProperties[i]) == false) {
+                throw new InvalidSchemaFormatException_1.InvalidSchemaFormatException("Schema format is invalid./n" + requiredProperties[i] + " property is required.");
+            }
+        }
     };
     return ContentGenerator;
 }());

@@ -113,7 +113,6 @@ export abstract class Parser {
 			let clone = parser.clone(data);
 			if (clone !== null) {
 				found = clone;
-
 				return;
 			}
 		});

@@ -107,7 +107,7 @@ export abstract class Parser {
 	 * @param data the object to search a parser for.
 	 * @returns A parser if found, otherwise returns null.
 	 */
-	public static GetValidParser(data: any): Parser {
+	public static GetValidParser(data: object): Parser {
 		let found = null;
 		this.availableParsers.forEach(parser => {
 			let clone = parser.clone(data);

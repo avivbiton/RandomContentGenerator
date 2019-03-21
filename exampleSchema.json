@@ -1,8 +1,14 @@
 {
 	"fields": {
 		"name": {
-			"text": ["Monster @{0}", "Goblin  @{1}", "Dragon  @{0}"],
-			"properties": [["LV", "BG", "RSCB"], "RV"]
+			"text": ["Monster @{0}", "Goblin  @{1}", "Dragon  @{1}"],
+			"properties": [
+				["LV", "BG", "RSCB"],
+				{
+					"min": 25,
+					"max": 500
+				}
+			]
 		},
 		"Health": {
 			"min": 5,

@@ -1,9 +1,10 @@
-Simple but customizable content generation for whatever reason you may need it (inspiration, random infinite content, and more).
+## Random Content Generator (RCG)
+Simple but customizable random content generator. From simple and basic random content to advanced and complex.  
+RCG gives you full control on how you want your content to be generated.
 
-## How it works
-You feed RCG a Schema and it will output the content in JSON format. As simple as that.
+## Usage
+A schema will tell RCG how to generate the content. Here's an example of a very basic schema.
 
-An example of a very basic schema.
 ```json
     {
         "fields":{
@@ -17,20 +18,22 @@ The generator will pick one of each at random and generate a random result, for 
 ```json
     { "projectTopic": "Travel", "Type": "Website", "Language": "C#" }
 ```
-## Usage
 
-Define a schema and feed it into the constructor and then simply call build();
+In your code define a new ContentGenerator and pass the schema in the constructor. 
+Calling the build() method will return the result as a string in JSON format.
 ```javascript
     let generator = new ContentGenerator(schema);
     let json = generator.build();
 ```
 
 ## Docs
-We offer full documentation over everything in RCG. But you don't have to go that far. Reading the first wiki page is enough to get you started. After that, each page you read will give more tools to customize your schemas the way you want to.
+We offer full documentation over everything in the library to make using and contributing to the library easy.  
+You can access the docs in the wiki section where we explain how to use the library to its full potential and explaining how each system work.
 
-## A little dive into the library
-RCG uses "Parsers" to read the schema. The library will read the schema and divide it into data objects and then find the first valid parser for the object, after finding the right parser, we tell it to parse the data and return the result.   
-If you wish to dive deeper visit our wiki section.
+## Contributing
+Everyone is welcome to help in any way possible (even minor).  
+If you modify the code, we do have a simple style guide to follow which can be found in the contributing section.  
+*If you make a pull request that modifies the code you must request a pull request into the development branch first.*
 
 ## Work In Progress
 This is a very early version of the package and may contain bugs and heavy changes in the future. use at your own risk.

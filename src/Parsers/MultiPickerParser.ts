@@ -19,7 +19,8 @@ export class MultiPickerParser extends Parser {
 			parsedString += currentArray[randomNumber(0, currentArray.length)];
 		}
 
-		return parsedString;
+
+		return this.parseProperties(parsedString);
 	}
 
 	protected cloneObject(data: object): MultiPickerParser {

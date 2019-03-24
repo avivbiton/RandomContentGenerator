@@ -1,59 +1,45 @@
 {
 	"fields": {
-		"name": {
-			"text": [
-				"Monster @{0}",
-				"Goblin  @{1}",
-				"Dragon  @{1}"
-			],
-			"properties": [
-				[
-					"LV",
-					"BG",
-					"RSCB"
-				],
-				{
-					"min": 25,
-					"max": 500
-				}
-			]
+		"CreatureName": [
+			"@g{0} Dragon",
+			"@g{0} Troll"
+		],
+		"Attack": {
+			"min": 5,
+			"max": 11
 		},
 		"Health": {
-			"min": 5,
-			"max": 10
+			"min": 100,
+			"max": 500
 		},
-		"Effect": {
+		"Description": {
 			"options": [
 				[
-					"When played @g{0} ",
-					"When drawn @g{1} ",
-					"On death @g{1}"
+					"Increased @{0}% move speed while hidden. ",
+					"Deal bonus @{1} @g{0} damage while attacking. "
 				],
 				[
-					"draw a card ",
-					"heal to full life ",
-					"remove a card from your opponent hand "
-				],
-				[
-					"and end your turn.",
-					"and reduce your mana by half.",
-					"and destory the larget monster on the field."
+					"While moving has increased resistance.",
+					"Immune to @g{0} damage."
 				]
 			],
 			"properties": [
-				"Aviv"
+				{
+					"min": 5,
+					"max": 11
+				},
+				{
+					"min": 100,
+					"max": 251
+				}
 			]
-		},
-		"Description": [
-			"This is awesome card",
-			"A lame card"
-		]
+		}
 	},
 	"globalProperties": [
-		"test",
-		{
-			"min": 50,
-			"max": 150
-		}
+		[
+			"Fire",
+			"Frost",
+			"Earth"
+		]
 	]
 }

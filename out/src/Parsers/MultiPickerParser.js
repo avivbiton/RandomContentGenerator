@@ -29,7 +29,7 @@ var MultiPickerParser = /** @class */ (function (_super) {
             var currentArray = this.options[i];
             parsedString += currentArray[utils_1.randomNumber(0, currentArray.length)];
         }
-        return parsedString;
+        return this.parseProperties(parsedString);
     };
     MultiPickerParser.prototype.cloneObject = function (data) {
         var newParser = new MultiPickerParser();

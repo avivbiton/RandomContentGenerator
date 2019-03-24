@@ -1,14 +1,13 @@
 {
   "name": "random-content-generator",
-  "version": "0.0.1",
-  "description": "Generator random content based on a schema",
-  "main": "index.js",
+  "version": "0.2.0",
+  "description": "Generate random content based on a schema",
+  "main": "src/ContentGenerator.ts",
   "scripts": {
-    "start": "node out/index.js",
     "test": "jest"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Aviv Biton",
+  "license": "MIT",
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "^24.0.11",

@@ -2,6 +2,10 @@
 Simple but customizable random content generator. From simple and basic random content to advanced and complex.  
 RCG gives you full control on how you want your content to be generated.
 
+### See it in action
+
+Test the library on [code sandbox](https://6439jy0wzk.codesandbox.io/)
+
 ## Usage
 Install the package on NPM  
 `npm i randomcontentgenerator`  

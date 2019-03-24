@@ -6,6 +6,11 @@
 		"esModuleInterop": true,
 		"sourceMap": true,
 		"outDir": "out",
-		"resolveJsonModule": true
-	}
+		"resolveJsonModule": true,
+		"declaration": true,
+	},
+	"exclude": [
+		"node_modules",
+		"out"
+	]
 }

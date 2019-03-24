@@ -1,9 +1,11 @@
 {
   "name": "random-content-generator",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Generate random content based on a schema",
-  "main": "src/ContentGenerator.ts",
+  "main": "out/ContentGenerator.js",
+  "types": "out/ContentGenerator.d.ts",
   "scripts": {
+    "build": "tsc --build",
     "test": "jest"
   },
   "author": "Aviv Biton",

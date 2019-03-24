@@ -10,8 +10,10 @@ Please read the code of conduct before making a pull request.
 * Methods and functions name must be declarative and self-explanatory as much as possible.  
   
  ### Pull Requests  
+ *Pulls requests may be sent at any given time, however it will be merged only when it passes the rules below*
  * All tests must pass.  
  * Update / create new tests to maintain as close to 100% test coverage.  
  * Update any outdated wiki pages or create new one.  
  
- *You may still submit the pull request even if you don't meet the requirements above to ask the community for help*
+ 
+### And most importantly, do NOT be afraid to contribute and make pull requests even if you think they aren't good enough, we are here to help !

@@ -3,7 +3,10 @@ Simple but customizable random content generator. From simple and basic random c
 RCG gives you full control on how you want your content to be generated.
 
 ## Usage
-A schema will tell RCG how to generate the content. Here's an example of a very basic schema.
+Install the package on NPM  
+`npm i random-content-generator`  
+
+Create a schema to tell RCG how to generate the content. Here's an example of a very basic schema.
 
 ```json
     {

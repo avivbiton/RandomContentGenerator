@@ -4,7 +4,7 @@ RCG gives you full control on how you want your content to be generated.
 
 ## Usage
 Install the package on NPM  
-`npm i random-content-generator`  
+`npm i randomcontentgenerator`  
 
 Create a schema to tell RCG how to generate the content. Here's an example of a very basic schema.
 

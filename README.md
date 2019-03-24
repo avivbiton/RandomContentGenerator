@@ -26,6 +26,58 @@ Calling the build() method will return the result as a string in JSON format.
     let json = generator.build();
 ```
 
+The schema above is simple and often not enough. Here we have an example of more advanced schema.
+
+```json
+{
+	"fields": {
+		"CreatureName": [
+			"@g{0} Dragon",
+			"@g{0} Troll"
+		],
+		"Attack": {
+			"min": 5,
+			"max": 11
+		},
+		"Health": {
+			"min": 100,
+			"max": 500
+		},
+		"Description": {
+			"options": [
+				[
+					"Increased @{0}% move speed while hidden. ",
+					"Deal bonus @{1} @g{0} damage while attacking. "
+				],
+				[
+					"While moving has increased resistance.",
+					"Immune to @g{0} damage."
+				]
+			],
+			"properties": [
+				{
+					"min": 5,
+					"max": 11
+				},
+				{
+					"min": 100,
+					"max": 251
+				}
+			]
+		}
+	},
+	"globalProperties": [
+		[
+			"Fire",
+			"Frost",
+			"Earth"
+		]
+	]
+}
+```
+
+This may seems like a lot but actually really simple when you take 5 minutes to understand it. More information is found at the wiki section.
+
 ## Docs
 We offer full documentation over everything in the library to make using and contributing to the library easy.  
 You can access the docs in the wiki section where we explain how to use the library to its full potential and explaining how each system work.

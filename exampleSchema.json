@@ -1,9 +1,17 @@
 {
 	"fields": {
 		"name": {
-			"text": ["Monster @{0}", "Goblin  @{1}", "Dragon  @{1}"],
+			"text": [
+				"Monster @{0}",
+				"Goblin  @{1}",
+				"Dragon  @{1}"
+			],
 			"properties": [
-				["LV", "BG", "RSCB"],
+				[
+					"LV",
+					"BG",
+					"RSCB"
+				],
 				{
 					"min": 25,
 					"max": 500
@@ -16,7 +24,11 @@
 		},
 		"Effect": {
 			"options": [
-				["When played @{r} ", "When drawn ", "On death "],
+				[
+					"When played @g{0} ",
+					"When drawn @g{1} ",
+					"On death @g{1}"
+				],
 				[
 					"draw a card ",
 					"heal to full life ",
@@ -28,8 +40,20 @@
 					"and destory the larget monster on the field."
 				]
 			],
-			"properties": ["Aviv"]
+			"properties": [
+				"Aviv"
+			]
 		},
-		"Description": ["This is awesome card", "A lame card"]
-	}
+		"Description": [
+			"This is awesome card",
+			"A lame card"
+		]
+	},
+	"globalProperties": [
+		"test",
+		{
+			"min": 50,
+			"max": 150
+		}
+	]
 }

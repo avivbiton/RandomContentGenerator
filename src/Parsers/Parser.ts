@@ -8,11 +8,15 @@ export abstract class Parser {
 	*/
 	private static availableParsers: Parser[] = new Array();
 
-	protected readonly optionalFields: string[];
+
+	/**
+	 * Push any required fields into this array
+	 */
+	protected requiredFields: any[];
 	protected properties: any[];
 
 	constructor() {
-		this.optionalFields = ["optionalFields", "properties"];
+		this.requiredFields = [];
 		this.properties = [];
 	}
 
@@ -39,37 +43,20 @@ export abstract class Parser {
 	 * Validate if an object properties match a parser.
 	 * @param data validates the object contains all the data to be used as parser.
 	 */
-	protected isDataValid(data: any): boolean {
+	public isDataValid(data: object | string | Array<any>): boolean {
 		if (typeof data !== "object") return false;
 
-		const parserKeys = Object.keys(this);
 		const dataKeys = Object.keys(data);
 
-		for (let i = 0; i < parserKeys.length; i++) {
-			const parserKeyName = parserKeys[i];
-
-			if (this.isOptionalField(parserKeyName)) continue;
+		for (let i = 0; i < this.requiredFields.length; i++) {
+			const parserKeyName = this.requiredFields[i];
 
 			const index = dataKeys.indexOf(parserKeyName);
 
-			if (
-				index == -1 ||
-				typeof data[dataKeys[index]] !== typeof this[parserKeyName]
-			)
+			if (index === -1 || typeof data[dataKeys[index]] !== typeof this[parserKeyName])
 				return false;
 		}
 		return true;
-	}
-
-	/**
-	 * checks if a property name is present in the optional properties array for the parser.
-	 * @param keyName the name of the property
-	 */
-	private isOptionalField(keyName: string): boolean {
-		if (typeof this[keyName] === "function") return true;
-		if (this.optionalFields.indexOf(keyName) != -1) return true;
-
-		return false;
 	}
 
 	/**

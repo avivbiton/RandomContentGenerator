@@ -8,7 +8,7 @@ import { InvalidSchemaFormatException } from "./Exceptions/InvalidSchemaFormatEx
 import { escapeRegExp } from "./utils";
 
 Parser.AddParsers([
-	new BasicParser([]),
+	new BasicParser(),
 	new MinMaxParser(),
 	new MultiPickerParser()
 ]);

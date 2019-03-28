@@ -4,9 +4,10 @@ import { randomNumber } from "../utils";
 export class BasicParser extends Parser {
 	text: string[];
 
-	constructor(text: string[]) {
+	constructor() {
 		super();
-		this.text = text;
+		this.text = [];
+		this.requiredFields.push("text");
 	}
 
 	parse(): string {
@@ -15,8 +16,10 @@ export class BasicParser extends Parser {
 		return this.parseProperties(selectedText);
 	}
 
-	protected isDataValid(data: object): boolean {
-		if (Array.isArray(data) || typeof data === "string") return true;
+	public isDataValid(data: any): boolean {
+		if ((Array.isArray(data) && data.length !== 0 && data.every(i => typeof i === "string"))
+			|| typeof data === "string") return true;
+
 		if (typeof data === "object") {
 			return super.isDataValid(data);
 		}
@@ -24,8 +27,17 @@ export class BasicParser extends Parser {
 	}
 
 	protected cloneObject(dataObject: any): Parser {
-		if (Array.isArray(dataObject)) return new BasicParser(dataObject);
-		if (typeof dataObject === "string") return new BasicParser([dataObject]);
-		return new BasicParser(dataObject["text"]);
+		let parser = new BasicParser();
+
+		if (Array.isArray(dataObject)) {
+			parser.text = dataObject;
+		}
+		else if (typeof dataObject === "string") {
+			parser.text = [dataObject];
+		} else {
+			parser.text = dataObject["text"];
+		}
+
+		return parser;
 	}
 }

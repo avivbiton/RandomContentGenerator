@@ -21,7 +21,7 @@ export class ContentGenerator {
 		this.globalProperties = new Array<string>();
 	}
 
-	build(): string {
+	build(): object {
 		this.throwIfInvalidSchema();
 		this.parseGlobalProperties();
 
@@ -36,7 +36,7 @@ export class ContentGenerator {
 			parsedText = this.applyGlobalProperties(parsedText);
 			newObject[fieldName] = parsedText;
 		}
-		return JSON.stringify(newObject);
+		return newObject;
 	}
 
 

@@ -12,7 +12,7 @@ test("Can accept an array of string as data", () => {
     expect(parser.isDataValid(["an array of strings"])).toBeTruthy();
 });
 
-test("Shoud not accept an array that is not type of string", () => {
+test("Shoud not accept an array that contains a non-string value", () => {
 
     let parser = new BasicParser();
     expect(parser.isDataValid([4])).toBeFalsy();
@@ -20,4 +20,6 @@ test("Shoud not accept an array that is not type of string", () => {
     expect(parser.isDataValid([undefined])).toBeFalsy();
     expect(parser.isDataValid(["string and bool", true])).toBeFalsy();
 });
+
+
 

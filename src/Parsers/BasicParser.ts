@@ -7,7 +7,7 @@ export class BasicParser extends Parser {
 	constructor() {
 		super();
 		this.text = [];
-		this.requiredFields.push("text");
+		this.requiredFields = ["text"];
 	}
 
 	parse(): string {

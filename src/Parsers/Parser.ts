@@ -96,11 +96,11 @@ export abstract class Parser {
 	 */
 	public static GetValidParser(data: object): Parser {
 		let found = null;
-		this.availableParsers.forEach(parser => {
+		this.availableParsers.some(parser => {
 			let clone = parser.clone(data);
 			if (clone !== null) {
 				found = clone;
-				return;
+				return true;
 			}
 		});
 

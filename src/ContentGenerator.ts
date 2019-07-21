@@ -8,7 +8,7 @@ import { InvalidSchemaFormatException } from "./Exceptions/InvalidSchemaFormatEx
 import { escapeRegExp } from "./utils";
 
 Parser.AddParsers([
-	new BasicParser([]),
+	new BasicParser(),
 	new MinMaxParser(),
 	new MultiPickerParser()
 ]);
@@ -21,7 +21,7 @@ export class ContentGenerator {
 		this.globalProperties = new Array<string>();
 	}
 
-	build(): string {
+	build(): object {
 		this.throwIfInvalidSchema();
 		this.parseGlobalProperties();
 
@@ -36,7 +36,7 @@ export class ContentGenerator {
 			parsedText = this.applyGlobalProperties(parsedText);
 			newObject[fieldName] = parsedText;
 		}
-		return JSON.stringify(newObject);
+		return newObject;
 	}
 
 
@@ -90,6 +90,10 @@ export class ContentGenerator {
 
 	}
 
+	/**
+	 * replaces all instance in the text with the appropriate global properties.
+	 * @param text the text that will be replaced
+	 */
 	private applyGlobalProperties(text: string): string {
 		let newString = text;;
 		for (let i = 0; i < this.globalProperties.length; i++) {

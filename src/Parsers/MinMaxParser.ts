@@ -8,6 +8,7 @@ export class MinMaxParser extends Parser {
 		super();
 		this.min = 0;
 		this.max = 1;
+		this.requiredFields = ["min", "max"];
 	}
 	parse(): string {
 		return randomNumber(this.min, this.max).toString();

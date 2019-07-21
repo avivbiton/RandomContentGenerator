@@ -7,6 +7,7 @@ export class MultiPickerParser extends Parser {
 	constructor() {
 		super();
 		this.options = new Array();
+		this.requiredFields = ["options"];
 	}
 
 	parse(): string {

@@ -39,6 +39,22 @@ export class ContentGenerator {
 		return newObject;
 	}
 
+	/**
+	 * Returns true if the schema is valid or an error object.
+	 * This will just call build() and returns the first error it picks on the way.
+	 */
+	isValid(): Boolean | object {
+		try {
+			this.build();
+			return true;
+		} catch (error) {
+			return error;
+		}
+	}
+
+	setSchema(newSchema: object): void {
+		this.schema = newSchema;
+	}
 
 	/**
 	 * Validate all the required properties are present and in the correct type. Throw an error otherwise.

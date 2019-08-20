@@ -31,7 +31,7 @@ export class ContentGenerator {
 			const fieldName = schemaFields[i];
 			const fieldObject = this.schema["fields"][fieldName];
 
-			let currentParser = this.findParser(fieldObject);
+			let currentParser = ContentGenerator.findParser(fieldObject);
 			let parsedText = currentParser.parse();
 			parsedText = this.applyGlobalProperties(parsedText);
 			newObject[fieldName] = parsedText;
@@ -54,6 +54,18 @@ export class ContentGenerator {
 
 	setSchema(newSchema: object): void {
 		this.schema = newSchema;
+	}
+
+
+	/**
+	 * Returns the parser for the given data Object or null if nothing matches
+	 */
+	public static getParser(dataObject: object): object | null {
+		try {
+			return ContentGenerator.findParser(dataObject);
+		} catch (error) {
+			return null;
+		}
 	}
 
 	/**
@@ -80,7 +92,7 @@ export class ContentGenerator {
 	 * finds the first matching parser for the data object. throws an error If it could not find one.
 	 * @param dataObject data object used to apply data to the parser
 	 */
-	private findParser(dataObject: object): Parser {
+	private static findParser(dataObject: object): Parser {
 		let currentParser = Parser.GetValidParser(dataObject);
 		if (currentParser == null) throw new InvalidParserException(dataObject);
 
@@ -100,7 +112,7 @@ export class ContentGenerator {
 
 		this.globalProperties = new Array<string>();
 		for (let i = 0; i < properties.length; i++) {
-			let parser = this.findParser(properties[i]);
+			let parser = ContentGenerator.findParser(properties[i]);
 			this.globalProperties.push(parser.parse());
 		}
 

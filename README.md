@@ -2,6 +2,10 @@
 Simple but customizable random content generator. From simple and basic random content to advanced and complex.  
 RCG gives you full control on how you want your content to be generated.
 
+## NOTE: 
+With the 0.3 update, the Docs are currently outdated.  
+Please be patient while I update the docs.
+
 ### See it in action
 
 Test the library on [code sandbox](https://6439jy0wzk.codesandbox.io/)

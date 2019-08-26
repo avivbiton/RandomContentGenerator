@@ -1,5 +1,5 @@
 import { Parser } from "./Parsers/Parser";
-
+import { Schema } from './Schema';
 import { InvalidParserException } from "./Exceptions/InvalidParserException";
 import { BasicParser } from "./Parsers/BasicParser";
 import { MinMaxParser } from "./Parsers/MinMaxParser";
@@ -14,11 +14,12 @@ Parser.AddParsers([
 ]);
 
 export class ContentGenerator {
-	schema: object;
-	globalProperties: Array<string>;
-	constructor(schema: object) {
+	schema: Schema;
+	globalPropertiesParsed: Array<string>;
+
+	constructor(schema: Schema) {
 		this.schema = schema;
-		this.globalProperties = new Array<string>();
+		this.globalPropertiesParsed = new Array<string>();
 	}
 
 	build(): object {
@@ -26,10 +27,10 @@ export class ContentGenerator {
 		this.parseGlobalProperties();
 
 		let newObject = {};
-		let schemaFields = Object.keys(this.schema["fields"]);
+		let schemaFields = this.schema.fields;
 		for (let i = 0; i < schemaFields.length; i++) {
-			const fieldName = schemaFields[i];
-			const fieldObject = this.schema["fields"][fieldName];
+			const fieldName = this.schema.fields[i].name;
+			const fieldObject = this.schema.fields[i].data;
 
 			let currentParser = ContentGenerator.findParser(fieldObject);
 			let parsedText = currentParser.parse();
@@ -52,7 +53,7 @@ export class ContentGenerator {
 		}
 	}
 
-	setSchema(newSchema: object): void {
+	setSchema(newSchema: Schema): void {
 		this.schema = newSchema;
 	}
 
@@ -72,18 +73,12 @@ export class ContentGenerator {
 	 * Validate all the required properties are present and in the correct type. Throw an error otherwise.
 	 * @param schema JSON schema 
 	 */
-	private throwIfInvalidSchema(schema?: object) {
+	private throwIfInvalidSchema(schema?: Schema) {
 
 		let schemaToCheck = schema ? schema : this.schema;
-
-		const requiredProperties = [{ name: "fields", type: "object" }];
-
-		for (let i = 0; i < requiredProperties.length; i++) {
-			const required = requiredProperties[i];
-			if (schemaToCheck.hasOwnProperty(required.name) == false ||
-				typeof schemaToCheck[required.name] !== required.type) {
-				throw new InvalidSchemaFormatException(`Schema format is missing a required field: "${required.name}" of type: "${required.type}"`);
-			}
+		if (schemaToCheck == null || schemaToCheck.hasOwnProperty("fields") === false ||
+			Array.isArray(schemaToCheck.fields) === false) {
+			throw new InvalidSchemaFormatException("Schema must contains fields property of type Array");
 		}
 	}
 
@@ -103,17 +98,18 @@ export class ContentGenerator {
 	 * Parse each global property and save it into the array to ensure the result are consistent
 	 */
 	private parseGlobalProperties() {
-		if (this.schema.hasOwnProperty("globalProperties") == false) return;
 
-		let properties = this.schema["globalProperties"];
+		if (this.schema.hasOwnProperty("globalProperties") === false) return;
+
+		let properties = this.schema.globalProperties;
 
 		if (Array.isArray(properties) == false)
 			throw new InvalidSchemaFormatException("global Properties must be an array.");
 
-		this.globalProperties = new Array<string>();
+		this.globalPropertiesParsed = new Array<string>();
 		for (let i = 0; i < properties.length; i++) {
 			let parser = ContentGenerator.findParser(properties[i]);
-			this.globalProperties.push(parser.parse());
+			this.globalPropertiesParsed.push(parser.parse());
 		}
 
 	}
@@ -124,10 +120,10 @@ export class ContentGenerator {
 	 */
 	private applyGlobalProperties(text: string): string {
 		let newString = text;;
-		for (let i = 0; i < this.globalProperties.length; i++) {
+		for (let i = 0; i < this.globalPropertiesParsed.length; i++) {
 			newString = newString.replace(
 				new RegExp(escapeRegExp(`@g{${i}}`), `g`),
-				this.globalProperties[i]
+				this.globalPropertiesParsed[i]
 			);
 		}
 		return newString;

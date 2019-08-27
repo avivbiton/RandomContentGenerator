@@ -59,27 +59,32 @@ The schema above is simple and often not enough. Here we have an example of more
                     "@{0} @g{0} Card"
                 ],
                 "properties": [
-                    ["Awesome", "Weak"]
+                    [
+                        "Awesome",
+                        "Weak"
+                    ]
                 ]
             }
         },
         {
             "name": "Description",
-            "data": [
-                "Deal @{0} @g{0} damage to the opponent",
-                "Draw @{1} Cards",
-                "Heal @{0} health"
-            ],
-            "properties": [
-                {
-                    "min": 20,
-                    "max": 51
-                },
-                {
-                    "min": 1,
-                    "max": 6
-                }
-            ]
+            "data": {
+                "text": [
+                    "Deal @{0} @g{0} damage to the opponent",
+                    "Draw @{1} Cards",
+                    "Heal @{0} health"
+                ],
+                "properties": [
+                    {
+                        "min": 20,
+                        "max": 51
+                    },
+                    {
+                        "min": 1,
+                        "max": 6
+                    }
+                ]
+            }
         },
         {
             "name": "Cost",

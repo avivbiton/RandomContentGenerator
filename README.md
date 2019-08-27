@@ -2,9 +2,8 @@
 Simple but customizable random content generator. From simple and basic random content to advanced and complex.  
 RCG gives you full control on how you want your content to be generated.
 
-## NOTE: 
-With the 0.3 update, the Docs are currently outdated.  
-Please be patient while I update the docs.
+## 0.3 Update
+0.3 update has some breaking changes. make sure the read the changes before updating.
 
 ### See it in action
 
@@ -17,13 +16,22 @@ Install the package on NPM
 Create a schema to tell RCG how to generate the content. Here's an example of a very basic schema.
 
 ```json
-    {
-        "fields":{
-            "projectTopic": ["Cooking", "Travel", "Job Search"],
-            "type": ["Microservice", "Website", "Backend server"],
-            "Language": ["Typescript", "C#", "Python"]
+{
+    "fields": [
+        {
+            "name": "Project Topic",
+            "data": ["Cooking", "Travel", "Job Search"]
+        },
+        {
+            "name": "Type",
+            "data": ["Microservice", "Website", "Backend server"]
+        },
+        {
+            "name": "Language",
+            "data": ["Typescript", "C#", "Python"]
         }
-    }
+    ]
+}
 ```
 The generator will pick one of each at random and generate a random result, for example:
 ```json
@@ -41,49 +49,53 @@ The schema above is simple and often not enough. Here we have an example of more
 
 ```json
 {
-	"fields": {
-		"CreatureName": [
-			"@g{0} Dragon",
-			"@g{0} Troll"
-		],
-		"Attack": {
-			"min": 5,
-			"max": 11
-		},
-		"Health": {
-			"min": 100,
-			"max": 500
-		},
-		"Description": {
-			"options": [
-				[
-					"Increased @{0}% move speed while hidden. ",
-					"Deal bonus @{1} @g{0} damage while attacking. "
-				],
-				[
-					"While moving has increased resistance.",
-					"Immune to @g{0} damage."
-				]
-			],
-			"properties": [
-				{
-					"min": 5,
-					"max": 11
-				},
-				{
-					"min": 100,
-					"max": 251
-				}
-			]
-		}
-	},
-	"globalProperties": [
-		[
-			"Fire",
-			"Frost",
-			"Earth"
-		]
-	]
+    "fields": [
+        {
+            "name": "Card Name",
+            "data": {
+                "text": [
+                    "@{0} @g{0} Spell",
+                    "@{0} @g{0} Spell",
+                    "@{0} @g{0} Card"
+                ],
+                "properties": [
+                    ["Awesome", "Weak"]
+                ]
+            }
+        },
+        {
+            "name": "Description",
+            "data": [
+                "Deal @{0} @g{0} damage to the opponent",
+                "Draw @{1} Cards",
+                "Heal @{0} health"
+            ],
+            "properties": [
+                {
+                    "min": 20,
+                    "max": 51
+                },
+                {
+                    "min": 1,
+                    "max": 6
+                }
+            ]
+        },
+        {
+            "name": "Cost",
+            "data": {
+                "min": 0,
+                "max": 11
+            }
+        }
+    ],
+    "globalProperties": [
+        [
+            "Fire",
+            "Frost",
+            "Earth"
+        ]
+    ]
 }
 ```
 

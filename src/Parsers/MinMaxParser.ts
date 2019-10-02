@@ -14,6 +14,10 @@ export class MinMaxParser extends Parser {
 		return randomNumber(this.min, this.max).toString();
 	}
 
+	getName() {
+		return "Min-Max Picker";
+	}
+
 	cloneObject(dataObject: object): MinMaxParser {
 		let newParser = new MinMaxParser();
 		newParser.min = dataObject["min"];

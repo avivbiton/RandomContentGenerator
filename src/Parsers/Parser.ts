@@ -21,6 +21,7 @@ export abstract class Parser {
 	}
 
 	abstract parse(): string;
+	abstract getName(): string;
 
 	/**
 	 * Create a new instance of a parser if the data object passed down as argument is valid otherwise returns null.

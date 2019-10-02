@@ -24,6 +24,10 @@ export class MultiPickerParser extends Parser {
 		return this.parseProperties(parsedString);
 	}
 
+	getName() {
+		return "Multi Picker";
+	}
+
 	protected cloneObject(data: object): MultiPickerParser {
 		let newParser = new MultiPickerParser();
 		newParser.options = data["options"];

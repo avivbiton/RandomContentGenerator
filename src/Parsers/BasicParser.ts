@@ -15,6 +15,9 @@ export class BasicParser extends Parser {
 
 		return this.parseProperties(selectedText);
 	}
+	getName() {
+		return "Basic Picker";
+	}
 
 	public isDataValid(data: any): boolean {
 		if ((Array.isArray(data) && data.length !== 0 && data.every(i => typeof i === "string"))

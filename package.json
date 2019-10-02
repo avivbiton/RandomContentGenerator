@@ -1,6 +1,6 @@
 {
   "name": "randomcontentgenerator",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "description": "Generate random content based on a schema",
   "main": "out/index.js",
   "types": "out/index.d.ts",
